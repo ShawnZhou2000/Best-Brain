@@ -45,7 +45,7 @@ function randomsort(a, b) {
 function startTimer() {
 	time++;
 	document.getElementById("time").innerHTML = time;
-	console.log(time);
+	
 }
 
 function randomNum(minNum, maxNum) {
@@ -352,7 +352,7 @@ function init() {
 		document.addEventListener("click", btnClick);
 		setInterval(startTimer,1000);
 	},10000);
-	console.log(randimg);
+	
 }
 
 function openGamePanel() {
