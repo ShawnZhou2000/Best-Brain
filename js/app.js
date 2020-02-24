@@ -308,6 +308,8 @@ function btnClick() {
 
 
 function init() {
+	finalrec = 0;
+	finaltime = 0;
 	for (let i = 0; i < 100; i++) {
 		randimg[i] = i / 10;
 		randimg[i] >>= 0;
