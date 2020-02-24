@@ -1,0 +1,67 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+}
+
+canvas {
+	display: block;
+}
+
+.win {
+	display: none;
+	margin: 0 auto;
+}
+
+.menu,
+.help,
+.win {
+	text-align: center;
+	margin-top: 2%;
+}
+
+.menu h1 {
+	font-size: 70px;
+}
+
+.menu h2 {
+	margin-top: 3%;
+}
+
+.menu p {
+	font-size: 22px;
+	margin-top: 2%;
+}
+
+.help {
+	display: none;
+}
+
+.game {
+	display: none;
+/* 	margin-top: 3%; */
+	margin: 5px;
+	padding: 5px;
+}
+
+.game-inner {
+	margin: 0 auto;
+	float: left;
+}
+
+.game-stat {
+	font-size: 30px;
+	margin: 0;
+	float: left;
+	margin-left: 10vw;
+	margin-top: 5vh;
+}
+
+.game-stat div {
+	margin-top: 2vh;
+}

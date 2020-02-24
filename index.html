@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>最强带脑(beta)</title>
+		<script src="js/easeljs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tweenjs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/soundjs.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style type="text/css">
+			body {
+				/* margin: 5px;
+				padding: 5px; */
+			}
+		</style>
+	</head>
+	<body onload="loadSound()">
+		<div class="menu" id="menu">
+			<h1>最强带脑</h1>
+			<h2>这个程序员是条懒狗<br>没有做手机端<br>请使用电脑获得最佳游玩体验</h2>
+			<p>beta version</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="start()">开始游戏</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="help()">游戏说明</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="git()">GitHub源码</button>
+			</p>
+			<p>ShawnZhou 2020.2</p>
+			<iframe src="assets/createjs.svg" frameborder="0" width="300" height="100">
+			</iframe>
+		</div>
+
+		<div class="help" id="help">
+			<h1>游戏说明</h1>
+			<img src="img/help1.jpg" class="img-fluid" style="max-width: 360px;">
+			<img src="img/help2.jpg" class="img-fluid" style="max-width: 360px;">
+			<p>
+				10*10的格子，10位不同的整活好手各10个，但你只有10秒的记忆时间！<br>
+				点击两张相同的图片可以消除它们，将它们全部消除就可以获得游戏的胜利！<br>
+				动用你的最强带脑，争取用更短的时间+更少的步数获得胜利！<br>
+				如果点太快可能会发生未知的bug，尽管我已经尽力修复，但我不保证这个bug不会再次出现！<br>
+				点击偶尔失灵请再点一次！歪比巴卜！（祝好运！）
+			</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="start()">开始游戏</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="back()">返回主界面</button>
+			</p>
+		</div>
+		<div class="game" id="game">
+			<div class="game-inner">
+				<canvas id="test" width="690px" height="690px"></canvas>
+			</div>
+			<div class="game-stat">
+				<div>得分：<span id="score">0</span></div>
+				<div>操作次数：<span id="rec">0</span></div>
+				<div>时间：<span id="time">0</span></div>
+			</div>
+		</div>
+		<div class="win" id="win">
+			<h1>你赢了！</h1>
+			<h2>
+				你就是传说中的最强带脑！
+			</h2>
+			<h3>
+				步数：<span id="finalrec"></span>
+			</h3>
+			<h3>
+				时间：<span id="finaltime"></span>
+			</h3>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="start()">重新开始游戏</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-primary btn-large" onclick="back()">返回主界面</button>
+			</p>
+		</div>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
