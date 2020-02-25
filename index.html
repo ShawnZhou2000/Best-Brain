@@ -6,6 +6,7 @@
 		<script src="js/easeljs.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/tweenjs.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/soundjs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/preloadjs.js" type="text/javascript" charset="utf-8"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -16,7 +17,7 @@
 			}
 		</style>
 	</head>
-	<body onload="loadSound()">
+	<body onload="loadSource()">
 		<div class="menu" id="menu">
 			<h1>最强带脑</h1>
 			<h2>这个程序员是条懒狗<br>没有做手机端<br>请使用电脑获得最佳游玩体验</h2>
@@ -81,6 +82,7 @@
 				<button type="button" class="btn btn-primary btn-large" onclick="back()">返回主界面</button>
 			</p>
 		</div>
+		<p id="debug"></p>
 		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

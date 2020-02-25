@@ -29,14 +29,102 @@ let arr = [
 	[]
 ];
 
-function loadSound() {
-	createjs.Sound.registerSound("assets/ok.wav",soundOK);
-	createjs.Sound.registerSound("assets/wrong.wav",soundNO);
-	createjs.Sound.registerSound("assets/click.wav",soundClick);
-	createjs.Sound.registerSound("assets/start.wav",soundStart);
-	createjs.Sound.registerSound("assets/countdown.wav",soundCountDown);
-	createjs.Sound.registerSound("assets/victory.wav",soundVictory);
+function setupManifest() {
+	manifest = [{
+			src: "img/un.png"
+		},
+		{
+			src: "img/ok.png"
+		},
+		{
+			src: "img/help1.jpg"
+		},
+		{
+			src: "img/help2.jpg"
+		},
+		{
+			src: "img/allstar/8.jpg"
+		},
+		{
+			src: "img/allstar/24.jpg"
+		},
+		{
+			src: "img/allstar/aoerjia.jpg"
+		},
+		{
+			src: "img/allstar/aoligei.jpg"
+		},
+		{
+			src: "img/allstar/cxk.jpg"
+		},
+		{
+			src: "img/allstar/dsm.jpg"
+		},
+		{
+			src: "img/allstar/jiege.jpg"
+		},
+		{
+			src: "img/allstar/lbw.jpg"
+		},
+		{
+			src: "img/allstar/sun.jpg"
+		},
+		{
+			src: "img/allstar/ylzz.jpg"
+		},
+		{
+			src: "img/assets/click.wav"
+		},
+		{
+			src: "img/assets/countdown.wav"
+		},
+		{
+			src: "img/assets/ok.wav"
+		},
+		{
+			src: "img/assets/start.wav"
+		},
+		{
+			src: "img/assets/victory.wav"
+		},
+		{
+			src: "img/assets/wrong.wav"
+		},
+		{
+			src: "img/assets/creatjs.svg"
+		},
+	];
 }
+
+function handleFileProgress(event) {
+	document.getElementById("debug").innerText = "loading..." + Math.ceil(event.loaded * 100) + "%";
+	console.log(event.loaded);
+}
+
+function loadComplete(event) {
+	setTimeout(function() {
+		document.getElementById("debug").innerHTML = "ok";
+	}, 400);
+
+}
+
+function loadSource() {
+	setupManifest();
+	let preload = new createjs.LoadQueue();
+	preload.installPlugin(createjs.SOUND);
+	preload.addEventListener("progress", handleFileProgress);
+	preload.addEventListener("complete", loadComplete);
+	preload.setMaxConnections(1);
+	preload.loadManifest(manifest);
+
+	createjs.Sound.registerSound("assets/ok.wav", soundOK);
+	createjs.Sound.registerSound("assets/wrong.wav", soundNO);
+	createjs.Sound.registerSound("assets/click.wav", soundClick);
+	createjs.Sound.registerSound("assets/start.wav", soundStart);
+	createjs.Sound.registerSound("assets/countdown.wav", soundCountDown);
+	createjs.Sound.registerSound("assets/victory.wav", soundVictory);
+}
+
 
 function randomsort(a, b) {
 	return Math.random() > .5 ? -1 : 1;
@@ -46,7 +134,7 @@ function randomsort(a, b) {
 function startTimer() {
 	time++;
 	document.getElementById("time").innerHTML = time;
-	
+
 }
 
 function randomNum(minNum, maxNum) {
@@ -104,8 +192,7 @@ function getimgpath(imgid, mode) {
 				path = "img/common/plane.png";
 				break;
 		}
-	}
-	else if (mode == "allstar") {
+	} else if (mode == "allstar") {
 		switch (imgid) {
 			case 0:
 				path = "img/allstar/8.jpg";
@@ -142,9 +229,10 @@ function getimgpath(imgid, mode) {
 	return path;
 }
 let clickCnt = 0;
+
 function btnClick() {
 	clickCnt++;
-	
+
 	let coord = event || window.event;
 	let coordx = coord.clientX;
 	let coordy = coord.clientY;
@@ -156,17 +244,16 @@ function btnClick() {
 					if (clickCnt > 2) {
 						// 你点的太快了
 						// console.log("test");
-						setTimeout(function(){
+						setTimeout(function() {
 							clickCnt = 0;
-						},200);
+						}, 200);
 						return;
 					}
 					// 定位到翻牌子的坐标和位置
 					// document.getElementById("debug").innerHTML = i + "," + j;
 					if (arr[i][j].solved) {
-						
-					}
-					else if (arr[i][j].isOpen) {
+
+					} else if (arr[i][j].isOpen) {
 						// 点击一个已经被打开的
 						// console.log(1);
 						status = 0;
@@ -190,7 +277,7 @@ function btnClick() {
 							let imgid = arr[i][j].imgid;
 							nowopen = randimg[imgid];
 							// nowopen代表当前打开的图片的编号(0-9)
-							let path = getimgpath(nowopen,"allstar");
+							let path = getimgpath(nowopen, "allstar");
 							// console.log(path);
 							let map = new createjs.Bitmap(path);
 							let testimg = new createjs.Container();
@@ -204,7 +291,7 @@ function btnClick() {
 							// status是1,此时已经有一个被翻开的牌子了,判断是否相同
 							let imgid = arr[i][j].imgid;
 							let newopen = randimg[imgid];
-							let path = getimgpath(nowopen,"allstar");
+							let path = getimgpath(nowopen, "allstar");
 							let map = new createjs.Bitmap(path);
 							let testimg = new createjs.Container();
 							map.x = 10 + 68 * i;
@@ -213,12 +300,12 @@ function btnClick() {
 							stage.addChild(testimg);
 							arr[i][j].isOpen = true;
 							// 这时候翻开了第二个牌子,需要判断是否相同
-							
+
 							if (nowopen == newopen) {
 								// 说明翻开相同的内容
 								let imgid = arr[i][j].imgid;
 								let newopen = randimg[imgid];
-								let path = getimgpath(nowopen,"allstar");
+								let path = getimgpath(nowopen, "allstar");
 								let map = new createjs.Bitmap(path);
 								let testimg = new createjs.Container();
 								map.x = 10 + 68 * i;
@@ -255,7 +342,7 @@ function btnClick() {
 									if (score == 50) {
 										finaltime = time;
 										finalrec = rec;
-										setTimeout(win,100);
+										setTimeout(win, 100);
 									}
 								}, 200);
 
@@ -263,7 +350,7 @@ function btnClick() {
 								// 说明翻开不同的内容
 								let imgid = arr[i][j].imgid;
 								let newopen = randimg[imgid];
-								let path = getimgpath(newopen,"allstar");
+								let path = getimgpath(newopen, "allstar");
 								let map = new createjs.Bitmap(path);
 								let testimg = new createjs.Container();
 								map.x = 10 + 68 * i;
@@ -338,7 +425,7 @@ function init() {
 			};
 			cnt++;
 			let imgid = arr[i][j].imgid;
-			let path = getimgpath(randimg[imgid],"allstar");
+			let path = getimgpath(randimg[imgid], "allstar");
 			let map = new createjs.Bitmap(path);
 			let testimg = new createjs.Container();
 			map.x = 10 + 68 * i;
@@ -347,7 +434,7 @@ function init() {
 			stage.addChild(testimg);
 		}
 	}
-	setTimeout(function(){
+	setTimeout(function() {
 		for (let i = 0; i < 10; i++) {
 			for (let j = 0; j < 10; j++) {
 				let unknown = new createjs.Bitmap("img/un.png");
@@ -360,9 +447,9 @@ function init() {
 		}
 		createjs.Sound.play(soundStart);
 		document.addEventListener("click", btnClick);
-		timerID = setInterval(startTimer,1000);
-	},10000);
-	
+		timerID = setInterval(startTimer, 1000);
+	}, 10000);
+
 }
 
 function openGamePanel() {
