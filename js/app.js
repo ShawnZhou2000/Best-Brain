@@ -15,6 +15,7 @@ let time = 0;
 let finalrec = 0;
 let finaltime = 0;
 let randimg = [];
+let timerID = null;
 let arr = [
 	[],
 	[],
@@ -308,8 +309,15 @@ function btnClick() {
 
 
 function init() {
+	console.log(1);
+	time = 0;
+	rec = 0;
+	score = 0;
 	finalrec = 0;
 	finaltime = 0;
+	document.getElementById("time").innerHTML = time;
+	document.getElementById("rec").innerHTML = rec;
+	document.getElementById("score").innerHTML = score;
 	for (let i = 0; i < 100; i++) {
 		randimg[i] = i / 10;
 		randimg[i] >>= 0;
@@ -352,7 +360,7 @@ function init() {
 		}
 		createjs.Sound.play(soundStart);
 		document.addEventListener("click", btnClick);
-		setInterval(startTimer,1000);
+		timerID = setInterval(startTimer,1000);
 	},10000);
 	
 }
@@ -363,6 +371,9 @@ function openGamePanel() {
 }
 
 function win() {
+	if (timerID != null)
+		clearInterval(timerID);
+	document.removeEventListener("click", btnClick);
 	document.getElementById("finalrec").innerHTML = finalrec;
 	document.getElementById("finaltime").innerHTML = finaltime;
 	document.getElementById("menu").style.display = "none";
